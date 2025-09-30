@@ -10,6 +10,13 @@ import type { Student, Course } from "../libs/types.js";
 // import database
 import { courses } from "../db/db.js";
 
+//import middlewares
+import type { User, CustomRequest, UserPayload } from "../libs/types.js";
+import { authenticateToken } from "../middlewares/authenMiddleware.js";
+import { checkRoleAdmin } from "../middlewares/checkRoleAdminMiddleware.js";
+
+
+
 const router = Router();
 
 // GET /api/v2/courses
