@@ -7,7 +7,7 @@ import {
 import type { Student, Enrollment } from "../libs/types.js";
 
 // import database
-import { enrollments,reset_enrollments,users } from "../db/db.js";
+import { enrollments,reset_enrollments,users,students } from "../db/db.js";
 
 //import middlewares
 import type { User, CustomRequest, UserPayload } from "../libs/types.js";
@@ -64,7 +64,7 @@ router.get("/:studentId",authenticateToken, checkAllRole , (req: CustomRequest, 
     const user = req.user!;
 
     if (user.role === "ADMIN" || (user.role === "STUDENT" && user.studentId === studentId)) {
-      const studentEnrollments = enrollments.filter(e => e.studentId === studentId);
+      const studentEnrollments = students.filter(e => e.studentId === studentId);
       return res.status(200).json({
         success: true,
         message: "Student Information",
