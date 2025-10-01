@@ -9,7 +9,7 @@ import { authenticateToken } from "../middlewares/authenMiddleware.js";
 import { checkRoleAdmin } from "../middlewares/checkRoleAdminMiddleware.js";
 
 // import database
-import { users, reset_users, reset_enrollments } from "../db/db.js";
+import { users, reset_users } from "../db/db.js";
 import { success } from "zod";
 //import { jwt, success } from "zod";
 
@@ -105,9 +105,9 @@ router.post("/logout", (req: Request, res: Response) => {
 });
 
 // POST /api/v2/users/reset
-router.post("/reset", authenticateToken,checkRoleAdmin, (req: CustomRequest, res: Response) => {
+router.post("/reset", (req: Request, res: Response) => {
   try {
-    reset_enrollments();
+    reset_users();
     return res.status(200).json({
       success: true,
       message: "User database has been reset",
